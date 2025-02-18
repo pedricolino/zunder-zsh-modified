@@ -1,13 +1,16 @@
+source "$ZUNDER_ZSH_DIR/spaceship-section-slurm-jobs.plugin.zsh"
+# spaceship add foobar
 SPACESHIP_PROMPT_ORDER=(
-    dir            # Current directory section
+    time
+    slurm_jobs
     git            # Git section (git_branch + git_status)
-    venv           # virtualenv section
     conda
+    venv           # virtualenv section
+    dir            # Current directory section
     exec_time      # Execution time
+    # jobs           # Background jobs indicator
+    # async          # Async jobs indicator
     exit_code 
-    time 
-    jobs           # Background jobs indicator
-    async          # Async jobs indicator
     line_sep       # Line break
     char           # Prompt character
 )
@@ -39,3 +42,8 @@ else
     SPACESHIP_CHAR_COLOR_SECONDARY=8
 fi
 SPACESHIP_CONDA_SYMBOL=""
+
+SPACESHIP_PROMPT_PREFIXES_SHOW=false
+SPACESHIP_PROMPT_SUFFIXES_SHOW=true
+
+SPACESHIP_TIME_FORMAT='%D{%H:%M}'
