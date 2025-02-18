@@ -1,3 +1,8 @@
+# Personal modifications
+
+This is a fork of the wonderful [warbacon/zunder-zsh](https://github.com/warbacon/zunder-zsh) project. I've made some personal modifications to the configuration to better suit my needs. They include some bash scripts that I found in different repositories or other places, my Tmux and Nano configurations as well as some very specific variables and aliases that I use for my work on the HPC cluster.
+
+
 # ⚡ Zunder-zsh
 
 Zunder-zsh is a minimalistic zsh configuration with sane defaults.

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Copying dangerous commands from the internet and forgetting to trim the `$` off the start?
+# Getting all sorts of `# -bash: $: command not found` errors?
+# This script is for you!
+# `$ command` will now ask for confirmation before executing the gum you scraped off of stackoverflow!
+# from https://gist.github.com/kallmanation/a93d85b14b49575c3f416c7dd3d7bd46
+
+echo "You are about to run the command:"
+echo "$@"
+read -n 1 -p "Do you want to continue? [yN]: " answer
+echo ""
+
+if [ "$answer" == "y" ]; then
+  echo "--- executing ---"
+  "$@"
+fi

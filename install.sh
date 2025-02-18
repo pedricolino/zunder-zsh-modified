@@ -177,6 +177,11 @@ load_files() {
         fi
         cp -vr "$SCRIPT_DIR/config/functions" "$ZUNDER_ZSH_DIR"
         cp -vr "$SCRIPT_DIR/config/spaceship.zsh" "$ZUNDER_ZSH_DIR"
+        cp -vr "$SCRIPT_DIR/config/files_to_source" "$ZUNDER_ZSH_DIR"
+
+        # add custom scripts from different repositories 
+        git clone --quiet "https://github.com/noporpoise/biogrok.git" "$ZUNDER_ZSH_DIR/functions/biogrok"
+        git clone --quiet --branch DLS/SLURM "https://github.com/mwinokan/MShTools.git" "$ZUNDER_ZSH_DIR/functions/MShTools"
     else
         echo
         fmt_warning "Canceled."
@@ -189,11 +194,53 @@ set_default() {
     ZSH_PATH="$(which zsh)"
 
     if [ "$os_type" != "android" ]; then
-        sudo usermod -s "$ZSH_PATH" "$USER"
+        
+        # check if you have sudo rights
+        prompt=$(sudo -nv 2>&1)
+        if [ $? -eq 0 ]; then
+            # exit code of sudo-command is 0
+            echo "You have sudo rights."
+            sudo usermod -s "$ZSH_PATH" "$USER"
+        elif echo $prompt | grep -q '^sudo:'; then
+            echo "You have sudo rights but need a password for this."
+            sudo usermod -s "$ZSH_PATH" "$USER" # not sure if this
+        else
+            echo "You do not have sudo rights. Then I must cheat and add two lines to your .bash_profile"
+
+            bash_profile_settings=$(printf "export SHELL=/bin/zsh\nexec /bin/zsh -l")
+
+            if grep -Fq "$bash_profile_settings" "$HOME/.bash_profile"; then
+            fmt_warning "Your .bash_profile already contains the same settings."
+            else
+                echo -e "$bash_profile_settings" >> "$HOME/.bash_profile"
+            fi
+        fi
+
     else
         chsh -s zsh
     fi
 }
+
+add_tmux_config() {
+    # Append to the end of the file if it is does not contain those settings already
+    if grep --quiet --no-messages --file "$SCRIPT_DIR/config/.tmux.conf" "$HOME/.tmux.conf"; then
+        fmt_success "Your TMUX configuration already contains the same settings."
+    else
+        cat "$SCRIPT_DIR/config/.tmux.conf" >> "$HOME/.tmux.conf"
+        fmt_success "TMUX configuration added."
+    fi
+}
+
+add_nano_config() {
+    # Append to the end of the file if it is does not contain those settings already
+    if grep --quiet --no-messages --file "$SCRIPT_DIR/config/.nanorc" "$HOME/.nanorc"; then
+        fmt_success "Your Nano configuration already contains the same settings."
+    else
+        cat "$SCRIPT_DIR/config/.nanorc" >> "$HOME/.nanorc"
+        fmt_success "Nano configuration added."
+    fi
+}
+
 
 main() {
     check_os_type
@@ -227,8 +274,27 @@ main() {
                 fmt_error "Zsh couldn't be applied as the default shell."
             fi
         else
-            fmt_warning "Zsh won't be setted as the default shell."
+            fmt_warning "Zsh won't be set as the default shell."
         fi
+    fi
+
+    fmt_info "Do you want to add my personal TMUX configuration?"
+    fmt_info "It will enable the mouse, scrolling and switch between panels with CTRL+B and then arrow key (left/right/up/down)"
+    fmt_prompt "[Y/n]:"
+    read -r prompt
+
+    if [ "$prompt" != "n" ] && [ "$prompt" != "N" ]; then
+        add_tmux_config
+    fi
+
+    fmt_info "Do you want to add my personal Nano settings?"
+    fmt_info "It will add coloring and change your shortcuts to Windows-like shortcuts such as CTRL+Z to undo, CTRL+S to save and CTRL+Q to quit."
+    fmt_warning "Note that you need to quit Nano wit CTRL+Q then."
+    fmt_prompt "[Y/n]:" 
+    read -r prompt
+
+    if [ "$prompt" != "n" ] && [ "$prompt" != "N" ]; then
+        add_nano_config
     fi
 
     echo

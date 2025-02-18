@@ -146,11 +146,14 @@ alias lla="ls -lA"
 if [[ "$DISABLE_EXA" != true && (-n "$commands[eza]" || -n "$commands[exa]") ]]; then
     [[ -n "$commands[eza]" && -z "$commands[exa]" ]] && alias exa="eza"
     alias ls="exa --icons --group-directories-first"
-    alias ls="exa --icons --group-directories-first"
-    alias ll="exa --icons --group-directories-first --git -l"
+    alias ll="exa --icons --group-directories-first  --time-style 'relative' --git -l"
     alias la="exa --icons --group-directories-first -a"
-    alias lla="exa --icons --group-directories-first --git -la"
+    alias lla="exa --icons --group-directories-first  --time-style 'relative' --git -la"
     alias lt="exa --icons -T"
+
+    # show absolute time format if required
+    alias ll_time="exa --icons --group-directories-first --git -l"
+    alias lla_time="exa --icons --group-directories-first --git -la"
 fi
 
 # More secure rm, cp and mv operations.
@@ -214,3 +217,80 @@ esac
 if [[ -f "$ZUNDER_ZSH_DIR/after.zsh" ]]; then
     source "$ZUNDER_ZSH_DIR/after.zsh"
 fi
+
+## Conda ======================================================================
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/data/cephfs-1/home/users/cemo10_c/work/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/data/cephfs-1/home/users/cemo10_c/work/miniconda/etc/profile.d/conda.sh" ]; then
+        . "/data/cephfs-1/home/users/cemo10_c/work/miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/data/cephfs-1/home/users/cemo10_c/work/miniconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+## PERSONAL ZSH PREFERENCES ====================================================
+# Allow completion from within a word/phrase
+setopt COMPLETE_IN_WORD
+
+# When completing from the middle of a word, move the cursor to the end of the word
+setopt ALWAYS_TO_END
+
+# Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
+setopt PROMPT_SUBST
+
+# Do not write events to history that are duplicates of previous events
+setopt HIST_IGNORE_DUPS
+
+# When searching history don't display results already cycled through twice
+setopt HIST_FIND_NO_DUPS
+
+# Remove extra blanks from each command line being added to history
+setopt HIST_REDUCE_BLANKS
+
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+
+## TMUX auto attach ============================================================
+# from https://gist.github.com/ThomasLeister/c18fb2666fb0924c6555634892285264
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then      # if this is an SSH session
+    if which tmux >/dev/null 2>&1; then                 # check if tmux is installed
+            if [[ -z "$TMUX" ]] ;then                   # do not allow "tmux in tmux"
+                    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
+                    if [[ -z "$ID" ]] ;then                              # if not available create a new one
+                            tmux new-session
+                    else
+                            tmux attach-session -t "$ID"                 # if available, attach to it
+                    fi
+            fi
+    fi
+fi
+
+## PERSONAL ADDITIONS ===========================================================
+# source my custom aliases and functions
+for file in $ZUNDER_ZSH_DIR/files_to_source/*.sh
+do
+    source "$file"
+done
+
+# for fzf
+source <(fzf --zsh)
+
+# set TMP directory (also important for SNAPPY)
+export TMPDIR=$HOME/scratch/tmp/$(hostname)
+mkdir -p $TMPDIR
+
+# variables for different tools
+export VSCODE_CLI_USE_FILE_KEYCHAIN=1
+export NXF_SINGULARITY_CACHEDIR=~/.singularity
+export MSHTOOLS=$ZUNDER_ZSH_DIR/functions/MShTools
+
+# add automatically added repositories with script collections to path
+export PATH=$PATH:$(find "$ZUNDER_ZSH_DIR/functions" -maxdepth 1 -type d | paste -sd ":" -)

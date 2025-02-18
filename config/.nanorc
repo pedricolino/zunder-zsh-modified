@@ -1,0 +1,24 @@
+set linenumbers
+#set autoindent
+set mouse
+set smooth
+set softwrap
+set tabsize 4
+set titlecolor white,black
+set numbercolor cyan
+set keycolor cyan
+set functioncolor cyan
+set statuscolor cyan
+set tabstospaces
+set suspend
+#bind ^c copytext main
+bind ^x cut main
+#bind ^v uncut main
+bind ^z undo main
+bind ^y redo main
+bind ^f whereis main
+bind F3 findnext main
+bind ^h replace main
+bind ^s writeout main
+bind ^q exit main
+bind ^u suspend main
