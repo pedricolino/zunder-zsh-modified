@@ -182,6 +182,7 @@ load_files() {
         # add custom scripts from different repositories 
         git clone --quiet "https://github.com/noporpoise/biogrok.git" "$ZUNDER_ZSH_DIR/functions/biogrok"
         git clone --quiet --branch DLS/SLURM "https://github.com/mwinokan/MShTools.git" "$ZUNDER_ZSH_DIR/functions/MShTools"
+        git clone --quiet "https://github.com/marlonrichert/zsh-hist.git" "$ZUNDER_ZSH_DIR/functions/zsh-hist"
     else
         echo
         fmt_warning "Canceled."
@@ -279,7 +280,7 @@ main() {
     fi
 
     fmt_info "Do you want to add my personal TMUX configuration?"
-    fmt_info "It will enable the mouse, scrolling and switch between panels with CTRL+B and then arrow key (left/right/up/down)"
+    fmt_info "It will enable the mouse, scrolling and switching between panels with Alt and arrow key (left/right/up/down)"
     fmt_prompt "[Y/n]:"
     read -r prompt
 

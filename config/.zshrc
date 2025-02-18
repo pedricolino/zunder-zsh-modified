@@ -123,7 +123,7 @@ bindkey -M emacs "^[[B" down-line-or-beginning-search
 
 ## HISTORY ====================================================================
 HISTFILE="$HOME/.zsh_history" # Location of the history file.
-HISTSIZE=50000                # Maximum number of commands in the history.
+HISTSIZE=100000                # Maximum number of commands in the history.
 SAVEHIST=10000                # Number of commands to save between sessions.
 setopt share_history          # Share history between sessions.
 
@@ -272,6 +272,25 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then      # if this is an SSH sess
             fi
     fi
 fi
+
+## ZSH-hist PLUGIN =============================================================
+# It automatically formats commands in the history.
+source "$ZUNDER_ZSH_DIR/functions/zsh-hist/zsh-hist.plugin.zsh"
+unsetopt HIST_REDUCE_BLANKS
+
+# Do not add failed commands to history.
+# See https://unix.stackexchange.com/a/790022
+delete-failed-history() {
+    case $? in
+    0|130|137)
+      ;; # Do nothing for allowed codes
+    *)
+      hist -s d -1
+      ;;
+  esac
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd delete-failed-history
 
 ## PERSONAL ADDITIONS ===========================================================
 # source my custom aliases and functions
