@@ -251,7 +251,7 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 
 # Remove extra blanks from each command line being added to history
-setopt HIST_REDUCE_BLANKS
+# setopt HIST_REDUCE_BLANKS
 
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_ALL_DUPS
@@ -279,18 +279,11 @@ source "$ZUNDER_ZSH_DIR/functions/zsh-hist/zsh-hist.plugin.zsh"
 unsetopt HIST_REDUCE_BLANKS
 
 # Do not add failed commands to history.
-# See https://unix.stackexchange.com/a/790022
-delete-failed-history() {
-    case $? in
-    0|130|137)
-      ;; # Do nothing for allowed codes
-    *)
-      hist -s d -1
-      ;;
-  esac
-}
+# See https://superuser.com/a/902508
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd delete-failed-history
+add-zsh-hook precmd zshaddhistory
 
 ## PERSONAL ADDITIONS ===========================================================
 # source my custom aliases and functions
