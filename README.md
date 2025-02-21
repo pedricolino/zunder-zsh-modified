@@ -1,7 +1,14 @@
 # Personal modifications
 
-This is a fork of the wonderful [warbacon/zunder-zsh](https://github.com/warbacon/zunder-zsh) project. I've made some personal modifications to the configuration to better suit my needs. They include some bash scripts that I found in different repositories or other places, my Tmux and Nano configurations as well as some very specific variables and aliases that I use for my work on the HPC cluster.
+This is a fork of the wonderful [warbacon/zunder-zsh](https://github.com/warbacon/zunder-zsh) project. I've made some personal modifications to the configuration to better suit my needs. They include some bash scripts that I found in different repositories or other places, my Tmux and Nano configurations as well as some very specific variables and aliases that I use for my work on the HPC cluster. Upon connection with the HPC cluster, it immediately attaches your running Tmux session or creates a new one if there are none.
 
+## Future plans
+
+- Test whether everything works on another device/system except my own.
+- Write Spaceship section for hostname that works on the cluster. The default one always shows login node.
+- Same with pending slurm jobs number
+- Maybe publish the running slurm jobs section.
+- Optionally install some tools such as ``cpz``, ``rmz``, etc.
 
 # ⚡ Zunder-zsh
 
@@ -22,7 +29,7 @@ Zunder-zsh is a minimalistic zsh configuration with sane defaults.
 - Responsive typing.
 - Fastest possible startup time without sacrificing functionality.
 - Provide **only completely necessary functionality** and be **easy to
-  extend**.
+OA  extend**.
 
 ## 💡 Features
 
@@ -132,7 +139,7 @@ docker run -it --rm warbacon/zunder-zsh:latest
 1. Clone this repository locally:
 
     ```sh
-    git clone https://github.com/warbacon/zunder-zsh.git
+    git clone https://github.com/pedricolino/zunder-zsh-modified.git
     ```
 
 2. Enter the cloned repository and run the install script:
