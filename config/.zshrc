@@ -285,6 +285,19 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd zshaddhistory
 
+## SYNTAX HIGHLIGHTING IN LESS ================================================
+# Get syntax highlighting in less if the package source-highlight is installed.
+# It can be installed with conda:
+#   conda install conda-forge::source-highlight
+# Your path to the relevant source-highlight script might differ.
+# In my case, it is in ~/work/miniconda/pkgs/source-highlight-3.1.9-h0f2e4ff_7/bin/src-hilite-lesspipe.sh
+SOURCE_HIGHLIGHT_SCRIPT=''
+# # If the script is found, set it as the LESSOPEN variable.
+if [[ -n $SOURCE_HIGHLIGHT_SCRIPT ]]; then
+    export LESSOPEN="| $SOURCE_HIGHLIGHT_SCRIPT %s"
+    export LESS=' -R '
+fi
+
 ## PERSONAL ADDITIONS ===========================================================
 # source my custom aliases and functions
 for file in $ZUNDER_ZSH_DIR/files_to_source/*.sh
@@ -306,3 +319,6 @@ export MSHTOOLS=$ZUNDER_ZSH_DIR/functions/MShTools
 
 # add automatically added repositories with script collections to path
 export PATH=$PATH:$(find "$ZUNDER_ZSH_DIR/functions" -maxdepth 1 -type d | paste -sd ":" -)
+
+# set nano as the default editor because I am not familiar with vi/vim (yet)
+export EDITOR='nano'
