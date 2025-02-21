@@ -2,6 +2,14 @@
 alias e="exit"
 alias b="cd .."
 alias ta="tmux attach"
+# if lsd is installed, use it, otherwise use ls
+if command -v lsd &> /dev/null
+then
+    alias ll="lsd -l --date relative"
+else
+    alias ll="ls -lh"
+fi
+
 
 ## SLURM COMMANDS =============================================================
 alias show_partition_limits='sacctmgr list QOS format="Name,MaxWall,MaxTRESPU%20"'
@@ -18,14 +26,15 @@ alias sp="srun --time 7-00 --mem=64G --ntasks=32 --immediate=30 --pty zsh -i"
 # Very powerful but short-lived. Just below high-mem partition.
 alias spp="srun --time 1-00 --mem=200G --ntasks=64 --immediate=30 --pty zsh -i"
 # Start a srun session for and with VSCode tunnel
-alias vsc="srun --time 1-00 --mem=200G --ntasks=32 --immediate=30 --pty zsh -i && code tunnel --no-sleep"
+alias vsc="srun --time 1-00 --mem=200G --ntasks=32 --immediate=30 --pty zsh -i -c 'code tunnel --disable-telemetry'"
 
 ### OBSERVE THE JOBS QUEUE ----------------------------------------------------
 # Keep monitoring the queue
 alias w1="watch --differences -n 10 squeue --me"
 alias w6="watch --differences -n 60 squeue --me"
- # where am I? Login node?
-alias wai="[[ -o login ]] && echo 'Login node. Quickly switch' || echo 'Non-Login'"
+# where am I? Login node?
+alias hn="hostname"
+alias wai="hostname" # Stands for "Where am I?"
 # Use the sq function from MShTools with the user set to the current user
 alias sq="sq.sh -u $USER "
 
