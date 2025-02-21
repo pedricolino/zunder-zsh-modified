@@ -2,6 +2,7 @@
 alias e="exit"
 alias b="cd .."
 alias ta="tmux attach"
+alias less="less -S" # do not wrap lines by default. Type -S in less to activate.
 # if lsd is installed, use it, otherwise use ls
 if command -v lsd &> /dev/null
 then
@@ -36,7 +37,7 @@ alias w6="watch --differences -n 60 squeue --me"
 alias hn="hostname"
 alias wai="hostname" # Stands for "Where am I?"
 # Use the sq function from MShTools with the user set to the current user
-alias sq="sq.sh -u $USER "
+alias sq="sq.sh -u $USER -p 0"
 
 ## CONDA AND MAMBA RELATED COMMANDS ===========================================
 alias ca="conda activate $1"
