@@ -136,18 +136,13 @@ docker run -it --rm warbacon/zunder-zsh:latest
 
 ### Installation
 
-1. Clone this repository locally:
+Clone this repository locally, enter the cloned repository and run the install script:
 
-    ```sh
-    git clone https://github.com/pedricolino/zunder-zsh-modified.git
-    ```
-
-2. Enter the cloned repository and run the install script:
-
-    ```sh
-    cd ./zunder-zsh
-    ./install.sh
-    ```
+```sh
+git clone https://github.com/pedricolino/zunder-zsh-modified.git
+cd ./zunder-zsh-modified
+./install.sh
+```
 
 ## 📁 File Structure
 
