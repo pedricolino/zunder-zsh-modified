@@ -21,7 +21,7 @@ _spaceship_add_newline() {
 }
 precmd_functions+=(_spaceship_add_newline)
 SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_COLOR=black
+SPACESHIP_TIME_COLOR=#4e4e4e
 SPACESHIP_EXIT_CODE_SHOW=true
 
 SPACESHIP_DIR_TRUNC=2
