@@ -1,3 +1,15 @@
+# Installation
+
+Clone this repository locally, enter the cloned repository and run the install script:
+
+```sh
+git clone https://github.com/pedricolino/zunder-zsh-modified.git
+cd ./zunder-zsh-modified
+./install.sh
+```
+
+I recommend to also install [fzf](https://github.com/junegunn/fzf/releases) for a better command search and [lsd](https://github.com/lsd-rs/lsd/releases) for a better folder view.
+
 # Personal modifications
 
 This is a fork of the wonderful [warbacon/zunder-zsh](https://github.com/warbacon/zunder-zsh) project. I've made some personal modifications to the configuration to better suit my needs. They include some bash scripts that I found in different repositories or other places, my Tmux and Nano configurations as well as some very specific variables and aliases that I use for my work on the HPC cluster. Upon connection with the HPC cluster, it immediately attaches your running Tmux session or creates a new one if there are none.
@@ -132,16 +144,6 @@ You can test it using this command with `docker` installed:
 
 ```sh
 docker run -it --rm warbacon/zunder-zsh:latest
-```
-
-### Installation
-
-Clone this repository locally, enter the cloned repository and run the install script:
-
-```sh
-git clone https://github.com/pedricolino/zunder-zsh-modified.git
-cd ./zunder-zsh-modified
-./install.sh
 ```
 
 ## 📁 File Structure
