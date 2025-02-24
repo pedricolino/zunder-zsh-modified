@@ -1,9 +1,11 @@
 source "$ZUNDER_ZSH_DIR/spaceship-section-slurm-jobs.plugin.zsh"
 source "$ZUNDER_ZSH_DIR/spaceship-section-pending-slurm-jobs.plugin.zsh"
+source "$ZUNDER_ZSH_DIR/spaceship-section-node-name.plugin.zsh"
 
 # spaceship add foobar
 SPACESHIP_PROMPT_ORDER=(
     time
+    node_name
     slurm_jobs
     pending_slurm_jobs
     git            # Git section (git_branch + git_status)

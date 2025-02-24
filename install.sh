@@ -179,6 +179,7 @@ load_files() {
         cp -vr "$SCRIPT_DIR/config/spaceship.zsh" "$ZUNDER_ZSH_DIR"
         cp -vr "$SCRIPT_DIR/config/spaceship-section-slurm-jobs.plugin.zsh" "$ZUNDER_ZSH_DIR"
         cp -vr "$SCRIPT_DIR/config/spaceship-section-pending-slurm-jobs.plugin.zsh" "$ZUNDER_ZSH_DIR"
+        cp -vr "$SCRIPT_DIR/config/spaceship-section-node-name.plugin.zsh" "$ZUNDER_ZSH_DIR"
         cp -vr "$SCRIPT_DIR/config/files_to_source" "$ZUNDER_ZSH_DIR"
 
         # add custom scripts from different repositories 
