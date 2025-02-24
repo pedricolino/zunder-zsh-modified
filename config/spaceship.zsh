@@ -1,8 +1,11 @@
 source "$ZUNDER_ZSH_DIR/spaceship-section-slurm-jobs.plugin.zsh"
+source "$ZUNDER_ZSH_DIR/spaceship-section-pending-slurm-jobs.plugin.zsh"
+
 # spaceship add foobar
 SPACESHIP_PROMPT_ORDER=(
     time
     slurm_jobs
+    pending_slurm_jobs
     git            # Git section (git_branch + git_status)
     conda
     venv           # virtualenv section
@@ -21,7 +24,7 @@ _spaceship_add_newline() {
 }
 precmd_functions+=(_spaceship_add_newline)
 SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_COLOR=#4e4e4e
+SPACESHIP_TIME_COLOR=#9e9e9e
 SPACESHIP_EXIT_CODE_SHOW=true
 
 SPACESHIP_DIR_TRUNC=2

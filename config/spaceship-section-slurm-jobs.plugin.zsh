@@ -1,8 +1,7 @@
 #
-# Slurm Jobs section
+# Pending Slurm Jobs section
 #
-# Foobar is a supa-dupa cool tool for making you development easier.
-# Link: https://www.slurm_jobs.xyz
+# Show number of running pending jobs
 
 # ------------------------------------------------------------------------------
 # Configuration
