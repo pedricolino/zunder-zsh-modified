@@ -287,11 +287,8 @@ add-zsh-hook precmd zshaddhistory
 
 ## SYNTAX HIGHLIGHTING IN LESS ================================================
 # Get syntax highlighting in less if the package source-highlight is installed.
-# It can be installed with conda:
-#   conda install conda-forge::source-highlight
 # Your path to the relevant source-highlight script might differ.
-# In my case, it is in ~/work/miniconda/pkgs/source-highlight-3.1.9-h0f2e4ff_7/bin/src-hilite-lesspipe.sh
-SOURCE_HIGHLIGHT_SCRIPT=''
+SOURCE_HIGHLIGHT_SCRIPT='~/work/bin/src-hilite-lesspipe.sh'
 # # If the script is found, set it as the LESSOPEN variable.
 if [[ -n $SOURCE_HIGHLIGHT_SCRIPT ]]; then
     export LESSOPEN="| $SOURCE_HIGHLIGHT_SCRIPT %s"

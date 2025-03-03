@@ -245,34 +245,6 @@ add_nano_config() {
     fi
 }
 
-add_source_highlight_path() {
-    # Determine CONDA_DIR_PATH
-    CONDA_DIR_PATH=$(echo $CONDA_EXE | sed "s/bin.*//")
-
-    # cancel if CONDA_DIR_PATH is empty
-    if [ -z "$CONDA_DIR_PATH" ]; then
-        fmt_error "CONDA_DIR_PATH is empty. Syntax highlighting for LESS could not be installed."
-        return
-    fi
-
-    # Find the source highlight script
-    SOURCE_HIGHLIGHT_SCRIPT=$(find "$CONDA_DIR_PATH" -maxdepth 3 -type f -name 'src-hilite-lesspipe.sh' 2>/dev/null)
-
-    # cancel if SOURCE_HIGHLIGHT_SCRIPT is empty
-    if [ -z "$SOURCE_HIGHLIGHT_SCRIPT" ]; then
-        fmt_error "Source-highlight script not found. Syntax highlighting for LESS could not be installed."
-        return
-    else
-        if [[ -n $SOURCE_HIGHLIGHT_SCRIPT ]]; then
-        # Escape slashes for use in sed replacement
-        ESCAPED_PATH=$(echo "$SOURCE_HIGHLIGHT_SCRIPT" | sed 's/[\/&]/\\&/g')
-
-        # Replace or insert the hardcoded value in .zshrc
-        sed -i "/SOURCE_HIGHLIGHT_SCRIPT=''/c\SOURCE_HIGHLIGHT_SCRIPT=\"$ESCAPED_PATH\"" "$ZSHRC"
-        fi
-    fi
-}
-
 main() {
     check_os_type
 
@@ -326,13 +298,6 @@ main() {
 
     if [ "$prompt" != "n" ] && [ "$prompt" != "N" ]; then
         add_nano_config
-    fi
-
-    fmt_prompt "Do you have source-highlight installed via Conda? [Y/n]:" 
-    read -r prompt
-
-    if [ "$prompt" != "n" ] && [ "$prompt" != "N" ]; then
-        add_source_highlight_path
     fi
 
     echo
