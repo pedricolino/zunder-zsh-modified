@@ -2,7 +2,9 @@
 alias e="exit"
 alias b="cd .."
 alias ta="tmux attach"
-alias less="less -S" # do not wrap lines by default. Type -S in less to activate.
+alias less="less -SN" # do not wrap lines by default. Type -S in less to activate. Show line numbers.
+alias zless="zless -S"
+
 # if lsd is installed, use it, otherwise use ls
 if command -v lsd &> /dev/null
 then
