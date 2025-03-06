@@ -6,8 +6,6 @@ source "$ZUNDER_ZSH_DIR/spaceship-section-node-name.plugin.zsh"
 SPACESHIP_PROMPT_ORDER=(
     time
     node_name
-    slurm_jobs
-    pending_slurm_jobs
     git            # Git section (git_branch + git_status)
     conda
     venv           # virtualenv section
@@ -15,6 +13,8 @@ SPACESHIP_PROMPT_ORDER=(
     exec_time      # Execution time
     # jobs           # Background jobs indicator
     # async          # Async jobs indicator
+    slurm_jobs
+    pending_slurm_jobs
     exit_code 
     line_sep       # Line break
     char           # Prompt character
