@@ -25,9 +25,9 @@ alias s="srun --time 7-00 --mem=8G --ntasks=4 --immediate=30 --pty zsh -i"
 # Long, medium resources
 alias sl="srun --time 7-00 --mem=32G --ntasks=8 --immediate=30 --pty zsh -i"
 # Long, powerful
-alias sp="srun --time 7-00 --mem=64G --ntasks=32 --immediate=30 --pty zsh -i"
+alias sp="srun --time 7-00 --mem=64G --ntasks=16 --immediate=30 --pty zsh -i"
 # Very powerful but short-lived. Just below high-mem partition.
-alias spp="srun --time 1-00 --mem=200G --ntasks=64 --immediate=30 --pty zsh -i"
+alias spp="srun --time 1-00 --mem=200G --ntasks=32 --immediate=30 --pty zsh -i"
 # Start a srun session for and with VSCode tunnel
 alias vsc="srun --time 1-00 --mem=200G --ntasks=32 --immediate=30 --pty zsh -i -c 'code tunnel --disable-telemetry'"
 
