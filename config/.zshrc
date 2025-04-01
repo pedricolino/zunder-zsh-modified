@@ -292,6 +292,8 @@ SOURCE_HIGHLIGHT_SCRIPT='~/work/bin/src-hilite-lesspipe.sh'
 # # If the script is found, set it as the LESSOPEN variable.
 if [[ -n $SOURCE_HIGHLIGHT_SCRIPT ]]; then
     export LESSOPEN="| $SOURCE_HIGHLIGHT_SCRIPT %s"
+# https://www.meejah.ca/blog/less-pygments
+#   export LESSOPEN="| pygmentize -f terminal -O -style=native -g %s"
     export LESS=' -R '
 fi
 
