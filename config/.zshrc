@@ -288,7 +288,8 @@ add-zsh-hook precmd zshaddhistory
 ## SYNTAX HIGHLIGHTING IN LESS ================================================
 # Get syntax highlighting in less if the package source-highlight is installed.
 # Your path to the relevant source-highlight script might differ.
-SOURCE_HIGHLIGHT_SCRIPT='~/work/bin/src-hilite-lesspipe.sh'
+#SOURCE_HIGHLIGHT_SCRIPT='~/work/bin/src-hilite-lesspipe.sh'
+SOURCE_HIGHLIGHT_SCRIPT=$(where src-hilite-lesspipe.sh)
 # # If the script is found, set it as the LESSOPEN variable.
 if [[ -n $SOURCE_HIGHLIGHT_SCRIPT ]]; then
     export LESSOPEN="| $SOURCE_HIGHLIGHT_SCRIPT %s"
@@ -305,10 +306,19 @@ do
 done
 
 # for fzf
-source <(fzf --zsh)
+if command -v fzf 2>&1 > /dev/null
+then
+        source <(fzf --zsh)
+fi
 
 # set TMP directory (also important for SNAPPY)
-export TMPDIR=$HOME/scratch/tmp/$(hostname)
+if ! command -v hostname 2>&1 > /dev/null
+then
+        export TMPDIR=$HOME/scratch/tmp/
+else
+        export TMPDIR=$HOME/scratch/tmp/$(hostname)
+fi
+
 mkdir -p $TMPDIR
 
 # variables for different tools
