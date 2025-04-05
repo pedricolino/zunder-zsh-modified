@@ -25,8 +25,8 @@ spaceship_node_name() {
   # If SPACESHIP_NODE_SHOW is false, don't show node section
   [[ $SPACESHIP_NODE_SHOW == false ]] && return
 
-  # Count the number of running Slurm jobs for the current user
-  local nodename=$(hostname | sed 's/hpc-//')
+  # get node name
+  local nodename=$(command -v hostname 2>&1 && hostname | sed 's/hpc-//')
   
   # If empty, don't show the section
   [[ -z $nodename ]] && return
