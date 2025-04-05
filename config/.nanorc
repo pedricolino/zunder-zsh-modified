@@ -11,14 +11,24 @@ set functioncolor cyan
 set statuscolor cyan
 set tabstospaces
 #set suspend # throws error in wsl
-#bind ^c copytext main
+##bind ^c copytext main
+#bind ^x cut main
+##bind ^v uncut main
+#bind ^z undo main
+#bind ^y redo main
+#bind ^f whereis main
+#bind F3 findnext main
+#bind ^h replace main
+#bind ^s writeout main
+bind ^q exit main
+#bind ^u suspend main
+bind ^c copy main
+bind ^v paste all
 bind ^x cut main
-#bind ^v uncut main
 bind ^z undo main
 bind ^y redo main
 bind ^f whereis main
 bind F3 findnext main
 bind ^h replace main
-bind ^s writeout main
-bind ^q exit main
-bind ^u suspend main
+set zap
+
