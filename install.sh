@@ -168,24 +168,27 @@ load_files() {
     read -r prompt
 
     if [ "$prompt" = "Y" ] || [ "$prompt" = "y" ]; then
-        cp -v "$SCRIPT_DIR/config/.zshrc" "$HOME/.zshrc"
-        cp -v "$SCRIPT_DIR/config/.zshenv" "$HOME/.zshenv"
+        ln -srf "$SCRIPT_DIR/config/.zshrc" "$HOME/.zshrc"
+        ln -srf "$SCRIPT_DIR/config/.zshenv" "$HOME/.zshenv"
         if [ ! -d "$ZUNDER_ZSH_DIR" ]; then
             mkdir -p "$ZUNDER_ZSH_DIR"
-            cp -vr "$SCRIPT_DIR/config/before.zsh" "$ZUNDER_ZSH_DIR"
-            cp -vr "$SCRIPT_DIR/config/after.zsh" "$ZUNDER_ZSH_DIR"
+            ln -srf "$SCRIPT_DIR/config/before.zsh" "$ZUNDER_ZSH_DIR"
+            ln -srf "$SCRIPT_DIR/config/after.zsh" "$ZUNDER_ZSH_DIR"
         fi
-        cp -vr "$SCRIPT_DIR/config/functions" "$ZUNDER_ZSH_DIR"
-        cp -vr "$SCRIPT_DIR/config/spaceship.zsh" "$ZUNDER_ZSH_DIR"
-        cp -vr "$SCRIPT_DIR/config/spaceship-section-slurm-jobs.plugin.zsh" "$ZUNDER_ZSH_DIR"
-        cp -vr "$SCRIPT_DIR/config/spaceship-section-pending-slurm-jobs.plugin.zsh" "$ZUNDER_ZSH_DIR"
-        cp -vr "$SCRIPT_DIR/config/spaceship-section-node-name.plugin.zsh" "$ZUNDER_ZSH_DIR"
-        cp -vr "$SCRIPT_DIR/config/files_to_source" "$ZUNDER_ZSH_DIR"
+        ln -srf "$SCRIPT_DIR/config/functions" "$ZUNDER_ZSH_DIR"
+        ln -srf "$SCRIPT_DIR/config/spaceship.zsh" "$ZUNDER_ZSH_DIR"
+        ln -srf "$SCRIPT_DIR/config/spaceship-section-slurm-jobs.plugin.zsh" "$ZUNDER_ZSH_DIR"
+        ln -srf "$SCRIPT_DIR/config/spaceship-section-pending-slurm-jobs.plugin.zsh" "$ZUNDER_ZSH_DIR"
+        ln -srf "$SCRIPT_DIR/config/spaceship-section-node-name.plugin.zsh" "$ZUNDER_ZSH_DIR"
+        ln -srf "$SCRIPT_DIR/config/files_to_source" "$ZUNDER_ZSH_DIR"
 
         # add custom scripts from different repositories 
-        git clone --quiet "https://github.com/noporpoise/biogrok.git" "$ZUNDER_ZSH_DIR/functions/biogrok"
-        git clone --quiet --branch DLS/SLURM "https://github.com/mwinokan/MShTools.git" "$ZUNDER_ZSH_DIR/functions/MShTools"
-        git clone --quiet "https://github.com/marlonrichert/zsh-hist.git" "$ZUNDER_ZSH_DIR/functions/zsh-hist"
+        git -C "$ZUNDER_ZSH_DIR/functions/biogrok" pull || \
+            git clone --quiet "https://github.com/noporpoise/biogrok.git" "$ZUNDER_ZSH_DIR/functions/biogrok"
+        git -C "$ZUNDER_ZSH_DIR/functions/MShTools" pull || \
+            git clone --quiet --branch DLS/SLURM "https://github.com/mwinokan/MShTools.git" "$ZUNDER_ZSH_DIR/functions/MShTools"
+        git -C "$ZUNDER_ZSH_DIR/functions/zsh-hist" pull || \
+            git clone --quiet "https://github.com/marlonrichert/zsh-hist.git" "$ZUNDER_ZSH_DIR/functions/zsh-hist"
     else
         echo
         fmt_warning "Canceled."
