@@ -327,7 +327,7 @@ export NXF_SINGULARITY_CACHEDIR=~/.singularity
 export MSHTOOLS=$ZUNDER_ZSH_DIR/functions/MShTools
 
 # add automatically added repositories with script collections to path
-export PATH=$PATH:$(find "$ZUNDER_ZSH_DIR/functions" -maxdepth 1 -type d | paste -sd ":" -)
+export PATH=$PATH:$(find "$ZUNDER_ZSH_DIR/functions/" -maxdepth 1 -type d | paste -sd ":" -)
 
 # set nano as the default editor because I am not familiar with vi/vim (yet)
 export EDITOR='nano'
