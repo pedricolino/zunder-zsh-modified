@@ -26,8 +26,11 @@ spaceship_node_name() {
   [[ $SPACESHIP_NODE_SHOW == false ]] && return
 
   # get node name
-  local nodename=$(command -v hostname 2>&1 && hostname | sed 's/hpc-//')
-  
+  if command -v hostname 2>&1
+  then
+        local nodename=$(hostname | sed 's/.*hpc-//')
+  fi
+
   # If empty, don't show the section
   [[ -z $nodename ]] && return
 
