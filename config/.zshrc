@@ -221,14 +221,14 @@ fi
 ## Conda ======================================================================
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/data/cephfs-1/home/users/cemo10_c/work/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/data/cephfs-1/home/users/cemo10_c/work/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/data/cephfs-1/home/users/cemo10_c/work/miniconda/etc/profile.d/conda.sh" ]; then
-        . "/data/cephfs-1/home/users/cemo10_c/work/miniconda/etc/profile.d/conda.sh"
+    if [ -f "/data/cephfs-1/home/users/cemo10_c/work/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/data/cephfs-1/home/users/cemo10_c/work/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/data/cephfs-1/home/users/cemo10_c/work/miniconda/bin:$PATH"
+        export PATH="/data/cephfs-1/home/users/cemo10_c/work/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -289,14 +289,14 @@ add-zsh-hook precmd zshaddhistory
 # Get syntax highlighting in less if the package source-highlight is installed.
 # Your path to the relevant source-highlight script might differ.
 #SOURCE_HIGHLIGHT_SCRIPT='~/work/bin/src-hilite-lesspipe.sh'
-SOURCE_HIGHLIGHT_SCRIPT=$(where src-hilite-lesspipe.sh)
+#SOURCE_HIGHLIGHT_SCRIPT=$(where src-hilite-lesspipe.sh)
 # # If the script is found, set it as the LESSOPEN variable.
-if [[ -n $SOURCE_HIGHLIGHT_SCRIPT ]]; then
-    export LESSOPEN="| $SOURCE_HIGHLIGHT_SCRIPT %s"
+#if [[ -n $SOURCE_HIGHLIGHT_SCRIPT ]]; then
+#    export LESSOPEN="| $SOURCE_HIGHLIGHT_SCRIPT %s"
 # https://www.meejah.ca/blog/less-pygments
 #   export LESSOPEN="| pygmentize -f terminal -O -style=native -g %s"
-    export LESS=' -R '
-fi
+#    export LESS=' -R '
+#fi
 
 ## PERSONAL ADDITIONS ===========================================================
 # source my custom aliases and functions
