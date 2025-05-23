@@ -183,6 +183,8 @@ load_files() {
         ln -srf "$SCRIPT_DIR/config/files_to_source" "$ZUNDER_ZSH_DIR"
 
         # add custom scripts from different repositories 
+        mkdir -p "$ZUNDER_ZSH_DIR"
+        mkdir -p "$ZUNDER_ZSH_DIR/functions"
         git -C "$ZUNDER_ZSH_DIR/functions/biogrok" pull || \
             git clone --quiet "https://github.com/noporpoise/biogrok.git" "$ZUNDER_ZSH_DIR/functions/biogrok"
         git -C "$ZUNDER_ZSH_DIR/functions/MShTools" pull || \
