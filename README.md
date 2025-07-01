@@ -29,10 +29,10 @@ Zunder-zsh is a minimalistic zsh configuration with sane defaults.
 ![Preview](./assets/preview.gif)
 
 > [!IMPORTANT]
-> Zunder-zsh 4.0 has been available for a while now, but it might be
-> interesting for everyone to 
-> [read the release](https://github.com/warbacon/zunder-zsh/discussions/16) to
-> see its improvements and drawbacks.
+> Zunder-zsh 4.0 has been available for a while now, but it might be interesting
+> for everyone to
+> [read the release](https://github.com/warbacon/zunder-zsh/discussions/16)
+> to see its improvements and drawbacks.
 
 ## 🚩 Goals
 
@@ -134,6 +134,10 @@ font in your terminal emulator.
 You can use
 [Termux:Styling](https://f-droid.org/es/packages/com.termux.styling) on Android
 and set as font, for example, Fira Code.
+
+If suddenly they are no longer displayed on your terminal, go to
+[its section](https://github.com/warbacon/zunder-zsh?tab=readme-ov-file#-my-icons-are-gone!)
+in the troubleshooting section.
 
 ### Testing
 
@@ -250,6 +254,12 @@ sudo usermod -s $(which bash) $USER
 ```
 
 You can change bash for the shell of your choice.
+
+### 😢 My icons are gone!
+
+It's quite possible that **your icons are out of date**. Depending on the method
+you used to install them, you may need to do it again and make sure your Nerd
+Fonts icons are on the latest version.
 
 ## 🤝 I need you
 
