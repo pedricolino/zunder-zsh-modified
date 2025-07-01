@@ -181,6 +181,7 @@ load_files() {
         ln -srf "$SCRIPT_DIR/config/spaceship-section-pending-slurm-jobs.plugin.zsh" "$ZUNDER_ZSH_DIR"
         ln -srf "$SCRIPT_DIR/config/spaceship-section-node-name.plugin.zsh" "$ZUNDER_ZSH_DIR"
         ln -srf "$SCRIPT_DIR/config/files_to_source" "$ZUNDER_ZSH_DIR"
+        ln -srf "$SCRIPT_DIR/config/nextflow.config" "$HOME/.nextflow/config"
 
         # add custom scripts from different repositories 
         git -C "$ZUNDER_ZSH_DIR/functions/biogrok" pull || \
