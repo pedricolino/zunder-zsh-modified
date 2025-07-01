@@ -16,11 +16,11 @@ This is a fork of the wonderful [warbacon/zunder-zsh](https://github.com/warbaco
 
 ## Future plans
 
-- Test whether everything works on another device/system except my own.
-- Write Spaceship section for hostname that works on the cluster. The default one always shows login node.
-- Same with pending slurm jobs number
-- Maybe publish the running slurm jobs section.
-- Optionally install some tools such as ``cpz``, ``rmz``, etc.
+- [x] Test whether everything works on another device/system except my own.
+- [x] Write Spaceship section for hostname that works on the cluster. The default one always shows login node.
+- [x] Same with pending slurm jobs number
+- [ ] Maybe publish the running slurm jobs section.
+- [ ] Optionally install some tools such as ``cpz``, ``rmz``, etc.
 
 # ⚡ Zunder-zsh
 
