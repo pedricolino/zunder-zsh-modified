@@ -54,3 +54,7 @@ mkdircd() { mkdir "$@" 2> >(sed s/mkdir/mcd/ 1>&2) && cd "$_"; }
 # Simple CLI calculator
 # from https://gist.github.com/kallmanation/fa535dc9da0cdadaaaf7c9d2630e5e99
 c() { echo "$@" | bc -l; }
+
+# Compute the mean/average of a list of numbers, e.g. depth in cnvkit results.
+# from https://unix.stackexchange.com/a/569755
+average () {printf '%s\n' 'scale=2' "($*)/$#" | tr ' ' + | bc}
