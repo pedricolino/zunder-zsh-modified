@@ -2,9 +2,27 @@
 # Script to swap sample positions in VCF file
 # Swaps columns 10 and 11 (sample data columns)
 
+# usage message
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <input_vcf.gz>"
+    exit 1
+fi
+
 # first argument: input VCF file
 input_vcf=$1
 tmp_vcf="swapped_tmp.vcf"
+
+# does the input file exist?
+if [ ! -f "$input_vcf" ]; then
+    echo "Error: Input file $input_vcf does not exist."
+    exit 1
+fi
+
+# is the input file a .vcf.gz file?
+if [[ "$input_vcf" != *.vcf.gz ]]; then
+    echo "Error: Input file $input_vcf is not a .vcf.gz file."
+    exit 1
+fi
 
 echo "Swapping sample columns in VCF file..."
 echo "Input: $input_vcf"
