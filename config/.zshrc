@@ -218,21 +218,30 @@ if [[ -f "$ZUNDER_ZSH_DIR/after.zsh" ]]; then
     source "$ZUNDER_ZSH_DIR/after.zsh"
 fi
 
-## Conda ======================================================================
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/data/cephfs-1/home/users/cemo10_c/work/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/data/cephfs-1/home/users/cemo10_c/work/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/data/cephfs-1/home/users/cemo10_c/work/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/data/cephfs-1/home/users/cemo10_c/work/miniforge3/bin:$PATH"
-    fi
+## CLUSTER SPECIFIC WARNING ==========================================================
+if [[ $HOST != hpc-login-* && $TERM != screen ]]; then 
+    echo -e "\e[31mYou are on a compute node but not in a tmux or screen session. \nYou should start a tmux or screen session to avoid being disconnected.\e[0m"
 fi
-unset __conda_setup
-# <<< conda initialize <<<
+
+## Conda ======================================================================
+# if host is not login and (term is screen or SSH_CONNECTION is empty), last condition to allow local conda use
+if [[ -n "$HOST" && $HOST != hpc-login-* && ($TERM == screen || -z $SSH_CONNECTION) ]]; then
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/data/cephfs-1/home/users/cemo10_c/work/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/data/cephfs-1/home/users/cemo10_c/work/miniforge3/etc/profile.d/conda.sh" ]; then
+            . "/data/cephfs-1/home/users/cemo10_c/work/miniforge3/etc/profile.d/conda.sh"
+        else
+            export PATH="/data/cephfs-1/home/users/cemo10_c/work/miniforge3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+    echo -e "\e[32mConda initialized\e[0m"
+fi
 
 ## PERSONAL ZSH PREFERENCES ====================================================
 # Allow completion from within a word/phrase
