@@ -2,6 +2,9 @@
 # Script to swap sample positions in VCF file
 # Swaps columns 10 and 11 (sample data columns)
 
+# exit if any command fails
+set -e
+
 # usage message
 if [ "$#" -ne 1 ]; then
     echo "Usage: $0 <input_vcf.gz>"
