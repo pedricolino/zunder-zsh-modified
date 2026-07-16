@@ -58,3 +58,11 @@ c() { echo "$@" | bc -l; }
 # Compute the mean/average of a list of numbers, e.g. depth in cnvkit results.
 # from https://unix.stackexchange.com/a/569755
 average () {printf '%s\n' 'scale=2' "($*)/$#" | tr ' ' + | bc}
+
+# Compress h5ad Scanpy/Anndata object
+compress_h5ad () {
+        local f="$1"
+        local opts="${2:-4}"
+        local out="${f%.h5ad}_gz.h5ad"
+        python -c "import scanpy as sc; sc.read_h5ad('$f').write('$out', compression='gzip', compression_opts=$opts)" && mv -f "$out" "$f"
+}
