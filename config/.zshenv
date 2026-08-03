@@ -5,3 +5,4 @@ skip_global_compinit=1
 typeset -U path
 path+="$HOME/.local/bin"
 export PATH
+. "$HOME/.cargo/env"
