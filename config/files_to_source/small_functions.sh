@@ -66,7 +66,3 @@ compress_h5ad () {
         local out="${f%.h5ad}_gz.h5ad"
         python -c "import scanpy as sc; sc.read_h5ad('$f').write('$out', compression='gzip', compression_opts=$opts)" && mv -f "$out" "$f"
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 02ed478 (add function to compress h5ad files with scanpy)
