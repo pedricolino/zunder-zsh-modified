@@ -320,13 +320,20 @@ then
         source <(fzf --zsh)
 fi
 
-# set TMP directory (also important for SNAPPY)
-if ! command -v hostname 2>&1 > /dev/null
+# if hostname includes 'hpc'
+if [[ $(hostname) == *"hpc"* ]]
 then
-        export TMPDIR=$HOME/scratch/tmp/
+    # set TMP directory (also important for SNAPPY)
+    if ! command -v hostname 2>&1 > /dev/null
+    then
+            export TMPDIR=$HOME/scratch/tmp/
+    else
+            export TMPDIR=$HOME/scratch/tmp/$(hostname)
+    fi
 else
-        export TMPDIR=$HOME/scratch/tmp/$(hostname)
+    export TMPDIR=/tmp
 fi
+
 
 mkdir -p $TMPDIR
 
