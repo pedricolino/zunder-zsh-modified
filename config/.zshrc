@@ -221,7 +221,7 @@ fi
 ## CLUSTER SPECIFIC WARNING ==========================================================
 if [[ $(hostname) == *"hpc"* ]]
 then
-    if [[ $HOST != hpc-login-* && $TERM != screen ]]; then 
+    if [[ $HOST != '' && $HOST != hpc-login-* && $TERM != screen* ]]; then 
         echo -e "\e[31mYou are on a compute node but not in a tmux or screen session. \nYou should start a tmux or screen session to avoid being disconnected.\e[0m"
     fi
 fi
@@ -231,7 +231,7 @@ fi
 if [[ $(hostname) == *"hpc"* ]]
 then
     # if host is not login and (term is screen or SSH_CONNECTION is empty), last condition to allow local conda use
-    if [[ -n "$HOST" && $HOST != hpc-login-* && ($TERM == screen || -z $SSH_CONNECTION) ]]; then
+    if [[ -n "$HOST" && $HOST != hpc-login-* && ($TERM == screen* || -z $SSH_CONNECTION) ]]; then
         # >>> conda initialize >>>
         # !! Contents within this block are managed by 'conda init' !!
         __conda_setup="$('/data/cephfs-1/home/users/cemo10_c/work/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
