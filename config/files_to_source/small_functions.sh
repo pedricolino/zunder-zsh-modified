@@ -66,3 +66,12 @@ compress_h5ad () {
         local out="${f%.h5ad}_gz.h5ad"
         python -c "import scanpy as sc; sc.read_h5ad('$f').write('$out', compression='gzip', compression_opts=$opts)" && mv -f "$out" "$f"
 }
+
+# Save the last executed command to a script and make it executable
+function last_cmd_to_script() {
+        local filename="${1:-script.sh}"   
+        local last_cmd=$(fc -l -n -1 -1 | sed 's/^[[:space:]]*//') 
+        printf "#\!/bin/sh\n\n%s\n" "$last_cmd" > "$filename"
+        chmod +x "$filename"                                  
+        echo "Saved last command to '$filename' and made it executable."
+}     
