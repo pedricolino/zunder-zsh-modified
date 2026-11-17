@@ -21,7 +21,7 @@ alias cancel_snakejobs="squeue -u $USER | grep "snakejob" | awk '{print $1}' | x
 
 ### START SRUN SESSIONS -------------------------------------------------------
 # Low resources, does not matter if it stays alive for long
-alias s="srun --time 7-00 --mem=8G --ntasks=4 --immediate=30 --pty zsh -i"
+alias s="srun --time 7-00 --mem 4G --pty zsh -i"
 # Long, low resources
 alias sl="srun --time 14-00 --mem=8G --ntasks=4 --immediate=30 --pty zsh -i"
 # Long, powerful
